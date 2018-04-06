@@ -4,4 +4,4 @@ testEventTimes = cumsum(rand(50))
 
 testDiff = HawkesProcess.eventDifferenceMatrix(testEventTimes)
 
-@test typeof(testDiff) 
+@test isa(testDiff, Array)
