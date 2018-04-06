@@ -2,4 +2,7 @@ using HawkesProcess
 using Base.Test
 
 # write your own tests here
-@test 1 == 2
+
+println("Starting Tests")
+
+@time @testset "Event Differnence Matrix Tests" begin include("event_difference_matrix_test.jl") end
