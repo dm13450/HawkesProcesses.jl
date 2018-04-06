@@ -1,3 +1,5 @@
+using RCall
+
 function HawkesFitDirichletBackground(eventTimes, maxT, its)
 
     @rput maxT
