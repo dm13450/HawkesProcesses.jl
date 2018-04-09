@@ -11,7 +11,7 @@ function countEvent(parentVector, eventTimes)
             continue
          end
             
-        childEventsVector[i] +=1
+        childEventsVector[parentVector[i]] +=1
 
         childShiftTime[i] = eventTimes[i] - eventTimes[parentVector[i]] 
     end

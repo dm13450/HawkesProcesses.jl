@@ -12,7 +12,7 @@ function HawkesFit(eventTimes, maxT, its)
     kernFuncInitial(x) = Distributions.pdf.(Distributions.Exponential(1/kernSamples[1]), x)
     
     parentVectorSample = parentSample(eventDifferences,  bgSamples[1], kappaSamples[1], kernFuncInitial)
-    kernSample = 0
+    kernSample = 0.0
 
     for i=2:its
         numBG, chEvents, shiftTimes = countEvent(parentVectorSample, eventTimes)

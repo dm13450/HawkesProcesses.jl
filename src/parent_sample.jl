@@ -12,9 +12,9 @@ function parentSample(eventsDiffMatrix, baseRate, kappa, kernel)
 end
 
 
-function parentSampleCol(eventsDiffMatrixCol, baseRate, kappa, kernel)
+function parentSampleCol(eventsDiffMatrixCol, baseRate::Float64, kappa, kernel)
     
-    childProb = kappa*kernel(eventsDiffMatrixCol[2:end])
+    childProb::Array{Float64, 1} = kappa*kernel(eventsDiffMatrixCol[2:end])
     sampleWeights = StatsBase.Weights(unshift!(childProb, baseRate))
     StatsBase.sample(sampleWeights) - 1
     
