@@ -1,8 +1,0 @@
-  /Users/deanmarkwick/.julia/v0.6/HawkesProcess/test:
-  total used in directory 32 available 9223372036852017968
-  drwxr-xr-x   6 deanmarkwick  staff  192  9 Apr 18:48 .
-  drwxr-xr-x  12 deanmarkwick  staff  384  6 Apr 11:00 ..
-  -rw-r--r--   1 deanmarkwick  staff   49  9 Apr 18:48 count_event_test.jl
-  -rw-r--r--   1 deanmarkwick  staff  191  6 Apr 19:13 event_difference_matrix_test.jl
-  -rw-r--r--   1 deanmarkwick  staff  898  9 Apr 18:46 parent_sample_test.jl
-  -rw-r--r--   1 deanmarkwick  staff  280  6 Apr 19:11 runtests.jl
