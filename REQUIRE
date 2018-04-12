@@ -1,4 +1,4 @@
 julia 0.6
 Distributions
-RCall
 StatsBase
+RCall 0.10-
