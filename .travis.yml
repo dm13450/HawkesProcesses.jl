@@ -8,8 +8,8 @@ julia:
   - nightly
 notifications:
   email: false
-git:
-  depth: 99999999
+##git:
+##  depth: 99999999
 
 ## uncomment the following lines to allow failures on nightly julia
 ## (tests will run but not make your overall status red)
@@ -28,7 +28,7 @@ before_install:
   # faster than using homebrew/science tap
   # but no permalink to release download
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg R-*.pkg -target /; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg R-*.pkg -target /; fi
 
 
 ## uncomment and modify the following lines to manually install system packages
@@ -41,6 +41,7 @@ before_install:
 
 ## uncomment the following lines to override the default test script
 script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia -e 'Pkg.clone(pwd()); Pkg.build("HawkesProcess"); Pkg.test("HawkesProcess"; coverage=true)'
 after_success:
   # push coverage results to Coveralls
