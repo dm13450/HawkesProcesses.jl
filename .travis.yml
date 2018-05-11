@@ -29,6 +29,8 @@ before_install:
   # but no permalink to release download
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg R-*.pkg -target /; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget "https://cran.r-project.org/src/contrib/dirichletprocess_0.2.1.tar.gz"; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo R CMD INSTALL dirichletprocess_0.2.1.tar.gz; fi
 
 
 ## uncomment and modify the following lines to manually install system packages

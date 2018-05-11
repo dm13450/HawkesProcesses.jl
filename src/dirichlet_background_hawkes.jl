@@ -2,8 +2,6 @@ using RCall
 
 function HawkesFitDirichletBackground(eventTimes, maxT, its)
 
-    R"require(dirichletprocess)"
-
     @rput maxT
     
     nEvents = size(eventTimes, 1)
