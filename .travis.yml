@@ -29,7 +29,7 @@ before_install:
   # but no permalink to release download
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg R-*.pkg -target /; fi
-  - then sudo R --vanilla -e 'install.packages("dirichletprocess", repos="http://cran.us.r-project.org")' ; fi
+  - sudo R --vanilla -e 'install.packages("dirichletprocess", repos="http://cran.us.r-project.org")' ; fi
 
 
 ## uncomment and modify the following lines to manually install system packages
