@@ -1,7 +1,7 @@
 function HierarchicalHawkesFit(eventTimesList, maxT, its)
 
     nObs = size(eventTimesList)[1]
-    nEvents = mapreduce(x->size(x,1), +, eventTimesArray)
+    nEvents = mapreduce(x->size(x,1), +, eventTimesList)
     
     eventDifferences = map(eventDifferenceMatrix, eventTimesList)
 
