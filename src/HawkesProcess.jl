@@ -10,6 +10,6 @@ module HawkesProcess
     include("dirichlet_background_hawkes.jl")
     include("hierarchical_all_constant.jl")
 
-    export HawkesFit
+    export HawkesFit, HierarchicalHawkesFit
 
 end # module

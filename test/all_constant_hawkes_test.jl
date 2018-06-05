@@ -1,4 +1,4 @@
-using HawkesProcess, Base.Test, Distributions
+using HawkesProcess, Base.Test
 
 testEvents = sort(rand(100)*100)
 
@@ -9,6 +9,3 @@ testSamples = HawkesProcess.HawkesFit(testEvents, 100, 3)
 @test size(testSamples[1]) == (3,)
 @test size(testSamples[2]) == (3,)
 @test size(testSamples[3]) == (3,)
-
-
-
