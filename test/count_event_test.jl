@@ -1,6 +1,6 @@
-using HawkesProcess, Base.Test, Distributions
+using HawkesProcess, Base.Test
 
-testEventTimes = [1,2,3]
+testEventTimes = [1.0,2.0,3.0]
 testParentVector = [0,1,0]
 
 
@@ -22,8 +22,14 @@ testCountEvents_nochildren = HawkesProcess.countEvent([0,0,0], testEventTimes)
 @test testCountEvents_nochildren[2] == [0,0,0]
 @test isempty(testCountEvents_nochildren[3])
 
+testEventTimes2 = [1,2,3] + .5
+testParentVector2 = [0,0,1]
 
 
 
 
 
+testCountEvents_hierarchical = map(
+    (x,y) -> HawkesProcess.countEvent(x,y),
+    [testParentVector, testParentVector2],
+    [testEventTimes, testEventTimes2],)
