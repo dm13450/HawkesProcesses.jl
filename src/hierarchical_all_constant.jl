@@ -36,7 +36,7 @@ function HierarchicalHawkesFit(eventTimesList, maxT, its)
 
         kernSample = Distributions.rand(Distributions.Gamma(0.01 + size(shiftTimes, 1), 1/(0.01 + sum(shiftTimes))))
         kernSamples[i] = kernSample
-        kernDistribution::Distributions.Exponential{Float64} = Distributions.Exponential(1/kernSample)
+        kernDistribution = Distributions.Exponential(1/kernSample)
 
         parentVectorSampleArray = map( x -> parentSample(x,
                                                          bgSamples[i],
