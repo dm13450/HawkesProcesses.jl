@@ -1,4 +1,1 @@
-julia 0.6
-Distributions
-StatsBase
-RCall
+julia 1.0
