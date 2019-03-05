@@ -8,31 +8,38 @@ expObj = Exponential(0.5)
 kernelTest(x) = pdf.(expObj, x)
 bgFunction(x) = 0.5 * x
 
+@testset "Parent Sample" begin
 
-### Test Constant
-testParentSampleCol_constant = HawkesProcesses.parentSampleCol(testDiff[:,1], 0.5, 0.5, kernelTest)
-testParentSample_constant = HawkesProcesses.parentSample(testDiff, 0.5, 0.5, kernelTest)
+    @testset "Constant Background Rate" begin
+        testParentSampleCol_constant = HawkesProcesses.parentSampleCol(testDiff[:,1], 0.5, 0.5, kernelTest)
+        testParentSample_constant = HawkesProcesses.parentSample(testDiff, 0.5, 0.5, kernelTest)
 
-@test isa(testParentSampleCol_constant, Int64)
-@test isa(testParentSample_constant, Array)
-@test size(testParentSample_constant) == (50, )
+        @test isa(testParentSampleCol_constant, Int64)
+        @test isa(testParentSample_constant, Array)
+        @test size(testParentSample_constant) == (50, )
+    end
 
-### Test Function
-testParentSampleCol_function = HawkesProcesses.parentSampleCol(testDiff[:,1], bgFunction, 0.5, kernelTest)
-testParentSample_function = HawkesProcesses.parentSample(testDiff, bgFunction, 0.5, kernelTest)
+    @testset "Function Background Rate" begin
 
-@test isa(testParentSampleCol_function, Int64)
-@test isa(testParentSample_function, Array)
-@test size(testParentSample_function) == (50, )
+        testParentSampleCol_function = HawkesProcesses.parentSampleCol(testDiff[:,1], bgFunction, 0.5, kernelTest)
+        testParentSample_function = HawkesProcesses.parentSample(testDiff, bgFunction, 0.5, kernelTest)
 
-### Test Hierarchical
+        @test isa(testParentSampleCol_function, Int64)
+        @test isa(testParentSample_function, Array)
+        @test size(testParentSample_function) == (50, )
 
-testParentSample_hier = map( x -> HawkesProcesses.parentSample(x,
-                                                 0.5,
-                                                 0.5,
-                                                 kernelTest), (testDiff, testDiff))
+    end
 
-@test isa(testParentSample_hier, Tuple)
-@test isa(testParentSample_hier[1], Array)
-@test isa(testParentSample_hier[2], Array)
-@test length(testParentSample_hier) == 2
+end
+
+
+
+# testParentSample_hier = map( x -> HawkesProcesses.parentSample(x,
+#                                                  0.5,
+#                                                  0.5,
+#                                                  kernelTest), (testDiff, testDiff))
+#
+# @test isa(testParentSample_hier, Tuple)
+# @test isa(testParentSample_hier[1], Array)
+# @test isa(testParentSample_hier[2], Array)
+# @test length(testParentSample_hier) == 2

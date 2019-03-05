@@ -1,24 +1,33 @@
 using Test
 
 testEventTimes = [1.0,2.0,3.0]
-testParentVector = [0,1,0]
 
+@testset "Count Events" begin
 
-testCountEvents = HawkesProcesses.countEvent(testParentVector, testEventTimes)
+    @testset "Basic" begin
 
-@test isa(testCountEvents, Tuple)
-@test length(testCountEvents) == 3
-@test testCountEvents[1] == 2
-@test testCountEvents[2] == [1,0,0]
-@test testCountEvents[3] == [1]
+        testParentVector = [0,1,0]
+        testCountEvents = HawkesProcesses.countEvent(testParentVector, testEventTimes)
 
-testCountEvents_nochildren = HawkesProcesses.countEvent([0,0,0], testEventTimes)
+        @test isa(testCountEvents, Tuple)
+        @test length(testCountEvents) == 3
+        @test testCountEvents[1] == 2
+        @test testCountEvents[2] == [1,0,0]
+        @test testCountEvents[3] == [1]
+    end
 
-@test isa(testCountEvents_nochildren, Tuple)
-@test length(testCountEvents_nochildren) == 3
-@test testCountEvents_nochildren[1] == 3
-@test testCountEvents_nochildren[2] == [0,0,0]
-@test isempty(testCountEvents_nochildren[3])
+    @testset "No Children" begin
+
+        testCountEvents_nochildren = HawkesProcesses.countEvent([0,0,0], testEventTimes)
+
+        @test isa(testCountEvents_nochildren, Tuple)
+        @test length(testCountEvents_nochildren) == 3
+        @test testCountEvents_nochildren[1] == 3
+        @test testCountEvents_nochildren[2] == [0,0,0]
+        @test isempty(testCountEvents_nochildren[3])
+    end
+
+end
 
 # testEventTimes2 = [1,2,3] + .5
 # testParentVector2 = [0,0,1]
