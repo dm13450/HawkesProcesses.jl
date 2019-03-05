@@ -1,8 +1,10 @@
+using StatsBase
+
 function parentSample(eventsDiffMatrix, baseRate, kappa, kernel)
 
     n = size(eventsDiffMatrix, 2)
 
-    parentSampleVector = Array{Int}(n)
+    parentSampleVector = Array{Int}(undef, n)
 
     for i=1:n
         parentSampleVector[i] = parentSampleCol(view(eventsDiffMatrix, :,i),
@@ -18,7 +20,7 @@ end
 function parentSampleCol(eventsDiffMatrixCol, baseRate::Float64, kappa, kernel)
 
     childProb::Array{Float64, 1} = kappa*kernel(eventsDiffMatrixCol[2:end])
-    sampleWeights = StatsBase.Weights(unshift!(childProb, baseRate))
+    sampleWeights = StatsBase.Weights(pushfirst!(childProb, baseRate))
     StatsBase.sample(sampleWeights) - 1
 
 end

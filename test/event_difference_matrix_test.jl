@@ -1,8 +1,11 @@
-using HawkesProcess, Base.Test
+using HawkesProcesses
+using Test
 
-testEventTimes = cumsum(rand(50))
+nEvents = 10
 
-testDiff = HawkesProcess.eventDifferenceMatrix(testEventTimes)
+testEventTimes = cumsum(rand(nEvents))
 
-@test isa(testDiff, Array)
-@test size(testDiff) == (51, 50)
+testDiff = HawkesProcesses.eventDifferenceMatrix(testEventTimes)
+
+#@test isa(testDiff, Array) Need to clear up typing
+@test size(testDiff) == (nEvents + 1, nEvents)

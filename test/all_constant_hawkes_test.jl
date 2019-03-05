@@ -1,8 +1,7 @@
-using HawkesProcess, Base.Test
 
 testEvents = sort(rand(100)*100)
 
-testSamples = HawkesProcess.HawkesFit(testEvents, 100, 3)
+testSamples = HawkesProcesses.HawkesFit(testEvents, 100, 3)
 
 @test isa(testSamples, Tuple)
 @test length(testSamples) == 3

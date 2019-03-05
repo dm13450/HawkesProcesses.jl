@@ -1,10 +1,10 @@
-using HawkesProcess, Base.Test
+using Test
 
 testEventTimes = [1.0,2.0,3.0]
 testParentVector = [0,1,0]
 
 
-testCountEvents = HawkesProcess.countEvent(testParentVector, testEventTimes)
+testCountEvents = HawkesProcesses.countEvent(testParentVector, testEventTimes)
 
 @test isa(testCountEvents, Tuple)
 @test length(testCountEvents) == 3
@@ -12,9 +12,7 @@ testCountEvents = HawkesProcess.countEvent(testParentVector, testEventTimes)
 @test testCountEvents[2] == [1,0,0]
 @test testCountEvents[3] == [1]
 
-
-
-testCountEvents_nochildren = HawkesProcess.countEvent([0,0,0], testEventTimes)
+testCountEvents_nochildren = HawkesProcesses.countEvent([0,0,0], testEventTimes)
 
 @test isa(testCountEvents_nochildren, Tuple)
 @test length(testCountEvents_nochildren) == 3
@@ -30,6 +28,6 @@ testParentVector2 = [0,0,1]
 
 
 testCountEvents_hierarchical = map(
-    (x,y) -> HawkesProcess.countEvent(x,y),
+    (x,y) -> HawkesProcesseses.countEvent(x,y),
     [testParentVector, testParentVector2],
     [testEventTimes, testEventTimes2],)
