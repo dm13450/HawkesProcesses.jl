@@ -1,3 +1,5 @@
+using Distributions
+
 function HawkesFit(eventTimes, maxT, its)
     nEvents = size(eventTimes, 1)
     eventDifferences = eventDifferenceMatrix(eventTimes)

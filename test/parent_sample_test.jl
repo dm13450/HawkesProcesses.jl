@@ -30,6 +30,13 @@ bgFunction(x) = 0.5 * x
 
     end
 
+    # @testset "Type Stability" begin
+    #
+    #     @inferred Int64 HawkesProcesses.parentSampleCol(testDiff[:,1], bgFunction, 0.5, kernelTest)
+    #     @inferred Array{Float64,1} HawkesProcesses.parentSample(testDiff, bgFunction, 0.5, kernelTest)
+    #
+    # end
+
 end
 
 
