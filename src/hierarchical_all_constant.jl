@@ -1,7 +1,7 @@
 function HierarchicalHawkesFit(eventTimesList, maxT, its)
 
     nObs = size(eventTimesList)[1]
-    nEvents = mapreduce(x->size(x,1), +, eventTimesList)
+    nEvents = mapreduce(x -> length(x), +, eventTimesList)
 
     eventDifferences = map(eventDifferenceMatrix, eventTimesList)
 
@@ -22,7 +22,7 @@ function HierarchicalHawkesFit(eventTimesList, maxT, its)
                                                      kappaSamples[1],
                                                      kernFunc), eventDifferences)
 
-    for i=2:its
+    for i = 2:its
 
         eventCounts = map((x,y) -> countEvent(x, y), parentVectorSampleArray, eventTimesList)
 
@@ -34,7 +34,7 @@ function HierarchicalHawkesFit(eventTimesList, maxT, its)
 
         kappaSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + sum(chEvents), 1/(0.01+nEvents)))
 
-        kernSample = Distributions.rand(Distributions.Gamma(0.01 + size(shiftTimes, 1), 1/(0.01 + sum(shiftTimes))))
+        kernSample = Distributions.rand(Distributions.Gamma(0.01 + length(shiftTimes), 1/(0.01 + sum(shiftTimes))))
         kernSamples[i] = kernSample
         kernDistribution = Distributions.Exponential(1/kernSample)
 

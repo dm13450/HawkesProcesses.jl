@@ -1,7 +1,7 @@
 using Distributions
 
 function HawkesFit(eventTimes, maxT, its)
-    nEvents = size(eventTimes, 1)
+    nEvents = length(eventTimes)
     eventDifferences = eventDifferenceMatrix(eventTimes)
 
     bgSamples = zeros(its)
@@ -12,23 +12,24 @@ function HawkesFit(eventTimes, maxT, its)
     kappaSamples[1] = rand()
     kernSamples[1] = rand()
 
-    kernDistribution = Distributions.Exponential(1/kernSamples[1])
+
+    kernSample = kernSamples[1]
+    kernDistribution = Distributions.Exponential(1/kernSample)
     kernFunc(x) = Distributions.pdf.(kernDistribution, x)
 
-    parentVectorSample = parentSample(eventDifferences,  bgSamples[1], kappaSamples[1], kernFunc)
-    kernSample = 0.0
+    parentVectorSample = parentSample(eventDifferences, bgSamples[1], kappaSamples[1], kernFunc)
 
-    for i=2:its
+    for i = 2:its
         numBG, chEvents, shiftTimes = countEvent(parentVectorSample, eventTimes)
 
-        bgSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + numBG, 1/(0.01+maxT)))
-        kappaSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + sum(chEvents), 1/(0.01+nEvents)))
-        kernSample = Distributions.rand(Distributions.Gamma(0.01 + size(shiftTimes, 1), 1/(0.01 + sum(shiftTimes))))
+        bgSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + numBG, 1/(0.01+1))) / maxT
+        kappaSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + sum(chEvents), 1/(0.01 + nEvents)))
+        kernSample = Distributions.rand(Distributions.Gamma(0.01 + length(shiftTimes), 1/(0.01 + sum(shiftTimes))))
         kernSamples[i] = kernSample
 
         kernDistribution = Distributions.Exponential(1/kernSamples[i])
         #kernFunc(x) = Distributions.pdf.(kernDistribution, x)
-        parentVectorSample = parentSample(eventDifferences,  bgSamples[i], kappaSamples[i], kernFunc)
+        parentVectorSample = parentSample(eventDifferences, bgSamples[i], kappaSamples[i], kernFunc)
     end
 
     bgSamples, kappaSamples, kernSamples
