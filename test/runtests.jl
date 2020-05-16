@@ -1,11 +1,13 @@
 using HawkesProcesses
+using Distributions
 using Test
 
 
 my_tests = ["count_event_test.jl",
             "event_difference_matrix_test.jl",
             "parent_sample_test.jl",
-            "all_constant_hawkes_test.jl"]
+            "all_constant_hawkes_test.jl",
+            "simulate_test.jl"]
 
 println("Running tests: ")
 

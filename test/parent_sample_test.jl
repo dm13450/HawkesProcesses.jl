@@ -1,5 +1,3 @@
-using Test
-using Distributions
 
 ### Test Data
 testEventTimes = cumsum(rand(50))

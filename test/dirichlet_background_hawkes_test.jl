@@ -1,4 +1,3 @@
-using Base.Test, Distributions
 
 testEvents = sort(rand(100)*100)
 

@@ -1,4 +1,3 @@
-using HawkesProcess, Base.Test
 
 testEvents = [sort(rand(100)*100), sort(rand(100)*100)]
 

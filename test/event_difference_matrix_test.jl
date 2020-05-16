@@ -1,5 +1,3 @@
-using HawkesProcesses
-using Test
 
 nEvents = 10
 
