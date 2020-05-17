@@ -7,7 +7,7 @@ testEventTimes = [1.0,2.0,3.0]
 
         testParentVector = [0,1,0]
         testCountEvents = HawkesProcesses.countEvent(testParentVector, testEventTimes)
-
+        inferTests && @inferred HawkesProcesses.countEvent(testParentVector, testEventTimes)
         @test isa(testCountEvents, Tuple)
         @test length(testCountEvents) == 3
         @test testCountEvents[1] == 2
@@ -18,7 +18,7 @@ testEventTimes = [1.0,2.0,3.0]
     @testset "No Children" begin
 
         testCountEvents_nochildren = HawkesProcesses.countEvent([0,0,0], testEventTimes)
-
+        inferTests && @inferred HawkesProcesses.countEvent([0,0,0], testEventTimes)
         @test isa(testCountEvents_nochildren, Tuple)
         @test length(testCountEvents_nochildren) == 3
         @test testCountEvents_nochildren[1] == 3

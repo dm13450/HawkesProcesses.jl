@@ -3,10 +3,11 @@ using Distributions
 function HawkesFit(eventTimes, maxT, its)
     nEvents = length(eventTimes)
     eventDifferences = eventDifferenceMatrix(eventTimes)
+    maxTDifferences = maxT .- eventTimes
 
-    bgSamples = zeros(its)
-    kappaSamples = zeros(its)
-    kernSamples = zeros(its)
+    bgSamples = zeros(Float64, its)
+    kappaSamples = zeros(Float64, its)
+    kernSamples = zeros(Float64, its)
 
     bgSamples[1] = rand()
     kappaSamples[1] = rand()
@@ -23,6 +24,11 @@ function HawkesFit(eventTimes, maxT, its)
         numBG, chEvents, shiftTimes = countEvent(parentVectorSample, eventTimes)
 
         bgSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + numBG, 1/(0.01+1))) / maxT
+
+        #if boundary_correction
+        #    H_tilde = sum(cdf.(kernDistribution, maxTDifferences))
+        #end
+
         kappaSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + sum(chEvents), 1/(0.01 + nEvents)))
         kernSample = Distributions.rand(Distributions.Gamma(0.01 + length(shiftTimes), 1/(0.01 + sum(shiftTimes))))
         kernSamples[i] = kernSample

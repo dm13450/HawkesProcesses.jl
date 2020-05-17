@@ -5,6 +5,7 @@ nEvents = 10
     @testset "Basic" begin
         testEventTimes = cumsum(rand(nEvents))
         testDiff = HawkesProcesses.eventDifferenceMatrix(testEventTimes)
+        inferTests && @inferred HawkesProcesses.eventDifferenceMatrix(testEventTimes)
         @test size(testDiff) == (nEvents + 1, nEvents)
         #@test isa(testDiff, Array) Need to clear up typing
     end

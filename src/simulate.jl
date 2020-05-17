@@ -9,14 +9,12 @@ function simulate(bg::Number, kappa::Float64, kern::Function, maxT::Number)
     allevents = backgroundEvents
 
     while !isempty(eventbus)
-        simevent = popfirst!(eventbus)
-        newevents = poisson_simulation(childfunction, maxT - simevent, lambda_max)
-        append!(eventbus, newevents)
-        if !isempty(newevents)
-            append!(allevents, newevents .+ simevent)
-        end
+        newevents = map(x->poisson_simulation(childfunction, maxT - x, lambda_max) .+ x, eventbus)
+        childevents = vcat(filter(!isempty, newevents)...)
+        append!(allevents, childevents)
+        eventbus = childevents
     end
-    allevents
+    sort(allevents)
 end
 
 function poisson_simulation(rate::Number, maxT::Number)
@@ -30,7 +28,7 @@ function poisson_simulation(rate::Function, maxT::Number)
     poisson_simulation(rate, maxT, lambda_max)
 end
 
-function poissson_simulation(rate::Function, maxT::Number, lambda_max::Number)
+function poisson_simulation(rate::Function, maxT::Number, lambda_max::Number)
     tstar = poisson_simulation(lambda_max, maxT)
     accept_prob = rate(tstar) / lambda_max
     tstar[rand(length(accept_prob)) .< accept_prob]
