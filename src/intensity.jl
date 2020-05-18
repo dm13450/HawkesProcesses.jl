@@ -22,7 +22,6 @@ function intensity(ts::Number, events::Array{<:Number, 1},
 end
 
 function kernel_contribution(ts::Number, events::Array{<:Number, 1}, kappa::Float64, kernel::Function)
-  #kappa * sum( kernel.(ts .- events[events .< ts]))
   evalEvents = events[events .< ts]
   s = 0
   if !isempty(evalEvents)

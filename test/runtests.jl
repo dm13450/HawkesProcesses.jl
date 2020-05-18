@@ -4,9 +4,9 @@ using Test
 
 inferTests = false
 
-my_tests = ["count_event_test.jl",
-            "event_difference_matrix_test.jl",
-            "parent_sample_test.jl",
+my_tests = ["event_difference_test.jl",
+            "parent_probabilites_test.jl",
+            "sample_parents_test.jl",
             "all_constant_hawkes_test.jl",
             "simulate_test.jl",
             "intensity_test.jl"]
