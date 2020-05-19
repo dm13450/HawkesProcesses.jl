@@ -5,7 +5,12 @@ Calculate the log likelihood of a Hawkes process for given parameters.
 
 # Arguments
 
+
+
 # Notes
+
+* The kernel function must be a proper probability distribution.
+
 
 # Examples
 

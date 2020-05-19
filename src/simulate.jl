@@ -1,7 +1,7 @@
 """
     simulate(bg::Number, kappa::Float64, kern::Function, maxT::Number)
 
-Simulate a Hawkes process between 0 and `maxT` with parameters `bg`, `kappa`, `kern`. 
+Simulate a Hawkes process between 0 and `maxT` with parameters `bg`, `kappa`, `kern`.
 
 # Arguments
 
@@ -28,13 +28,15 @@ function simulate(bg::Number, kappa::Float64, kern::Function, maxT::Number)
 
     childfunction(x) = kappa * kern(x)
     lambda_max = childfunction(0)
+    childimulation(x) = poisson_simulation(childfunction, maxT - x, lambda_max) .+ x
+
     backgroundEvents = poisson_simulation(bg, maxT)
 
     eventbus = backgroundEvents
     allevents = backgroundEvents
 
     while !isempty(eventbus)
-        newevents = map(x->poisson_simulation(childfunction, maxT - x, lambda_max) .+ x, eventbus)
+        newevents = map(childsimulation, eventbus)
         childevents = vcat(filter(!isempty, newevents)...)
         append!(allevents, childevents)
         eventbus = childevents

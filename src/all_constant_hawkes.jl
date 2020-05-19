@@ -1,5 +1,19 @@
+"""
+    fit(eventTimes, maxT, its)
 
-function fit(eventTimes, maxT, its)
+# Arugments
+
+* eventTimes The array of event times to fit the Hawkes process too.
+* maxT The boundary time over which the events were observed.
+* Number of iterations to sample for
+
+# Notes
+
+* All eventTimes must be unique
+
+"""
+
+function fit(eventTimes, maxT::Number, its::Int64)
 
     nEvents = length(eventTimes)
     eventDifferences = event_difference_list(eventTimes)

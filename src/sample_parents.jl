@@ -3,7 +3,7 @@
 Sample the parent label of each event for given parameters.
 
 """
-function sample_parents(eventTimes, bg, kappa, kern)
+function sample_parents(eventTimes, bg, kappa, kern::Function)
     eventdifferencelist = event_difference_list(eventTimes)
     sample_parents(eventTimes, bg, kappa, kern, eventdifferencelist)
 end
@@ -11,7 +11,7 @@ end
 function sample_parents(eventTimes, bg, kappa, kern, eventdifferencelist)
     n = length(eventdifferencelist)
     numBackgroundEvents = 0
-    childEventsVector = zeros(n)
+    childEventsVector = zeros(Int64, n)
     childShiftTime = zeros(Float64, n)
     parents = Array{Int64, 1}(undef, n)
 
