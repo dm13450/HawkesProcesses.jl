@@ -13,11 +13,11 @@
 
 """
 
-function fit(eventTimes, maxT::Number, its::Int64)
+function fit(events::Array{<:Number, 1}, maxT::Number, its::Int64)
 
-    nEvents = length(eventTimes)
-    eventDifferences = event_difference_list(eventTimes)
-    maxTDifferences = maxT .- eventTimes
+    nEvents = length(events)
+    eventDifferences = event_difference_list(events)
+    maxTDifferences = maxT .- events
 
     bgSamples = zeros(Float64, its)
     kappaSamples = zeros(Float64, its)
@@ -31,23 +31,21 @@ function fit(eventTimes, maxT::Number, its::Int64)
     kernDistribution = Distributions.Exponential(1/kernSample)
     kernFunc(x) = Distributions.pdf.(kernDistribution, x)
 
-    parentVectorSample, numBG, chEvents, shiftTimes = sample_parents(eventTimes, bgSamples[1], kappaSamples[1], kernFunc, eventDifferences)
+    parentVectorSample, numBG, chEvents, shiftTimes = sample_parents(events, bgSamples[1], kappaSamples[1], kernFunc, eventDifferences)
 
     for i = 2:its
 
         bgSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + numBG, 1/(0.01+1))) / maxT
 
-        #if boundary_correction
-        #    H_tilde = sum(cdf.(kernDistribution, maxTDifferences))
-        #end
+        H_tilde = sum(cdf.(kernDistribution, maxTDifferences))
 
-        kappaSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + sum(chEvents), 1/(0.01 + nEvents)))
+        kappaSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + sum(chEvents), 1/(0.01 + H_tilde)))
         kernSample = Distributions.rand(Distributions.Gamma(0.01 + length(shiftTimes), 1/(0.01 + sum(shiftTimes))))
         kernSamples[i] = kernSample
 
         kernDistribution = Distributions.Exponential(1/kernSamples[i])
         #kernFunc(x) = Distributions.pdf.(kernDistribution, x)
-        parentVectorSample, numBG, chEvents, shiftTimes = sample_parents(eventTimes, bgSamples[i], kappaSamples[i], kernFunc, eventDifferences)
+        parentVectorSample, numBG, chEvents, shiftTimes = sample_parents(events, bgSamples[i], kappaSamples[i], kernFunc, eventDifferences)
     end
 
     bgSamples, kappaSamples, kernSamples

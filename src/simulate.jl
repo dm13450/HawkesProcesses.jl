@@ -28,7 +28,7 @@ function simulate(bg::Number, kappa::Float64, kern::Function, maxT::Number)
 
     childfunction(x) = kappa * kern(x)
     lambda_max = childfunction(0)
-    childimulation(x) = poisson_simulation(childfunction, maxT - x, lambda_max) .+ x
+    childsimulation(x) = poisson_simulation(childfunction, maxT - x, lambda_max) .+ x
 
     backgroundEvents = poisson_simulation(bg, maxT)
 

@@ -12,7 +12,6 @@ module HawkesProcesses
     include("intensity.jl")
     include("likelihood.jl")
     include("utils.jl")
-    #include("dirichlet_background_hawkes.jl")
 
     export HawkesFit, HierarchicalHawkesFit
 

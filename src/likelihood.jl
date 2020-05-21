@@ -16,12 +16,12 @@ Calculate the log likelihood of a Hawkes process for given parameters.
 
 """
 
-function likelihood(events, background::Float64, kappa::Float64, kernel::Distributions.Distribution, maxT::Number)
+function likelihood(events::Array{<:Number, 1}, background::Float64, kappa::Float64, kernel::Distributions.Distribution, maxT::Number)
     kernel_f, kernel_cdf = generate_kernel_functions(kernel)
     likelihood(events, background, kappa, kernel_f, kernel_cdf, maxT)
 end
 
-function likelihood(events, background::Float64, kappa::Float64, kernel::Function, kernel_cdf::Function, maxT::Number)
+function likelihood(events::Array{<:Number, 1}, background::Float64, kappa::Float64, kernel::Function, kernel_cdf::Function, maxT::Number)
 
     logIntensitySum = sum(log.(intensity(events, events, background, kappa, kernel)))
     backgroundIntegral = background * maxT
