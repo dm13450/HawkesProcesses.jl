@@ -6,10 +6,10 @@ Calculate the parent probabilites of each event.
 
 # Arguments
 
-* events Array of event times.
-* bg Background intensity
-* kappa Child excitation parameter.
-* kern Kernel decay function
+* `events` Array of event times.
+* `bg` Background intensity
+* `kappa` Child excitation parameter.
+* `kern` Kernel decay function
 
 # Examples
 

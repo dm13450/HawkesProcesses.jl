@@ -2,13 +2,13 @@
 
 A Julia package for fitting, analysing and plotting Hawkes processes.
 
-The parameters of the Hawkes process can be inferred using the enhanced Bayesian MCMC algorithm as discussed here. 
+You can find the maths behind the algorithm [here](https://dm13450.github.io/assets/hawkesprocesses.pdf). The Bayesian sampling algorithm is a generic version of the `bayesianETAS` package from CRAN which can be found [here](https://cran.r-project.org/web/packages/bayesianETAS/index.html).
 
 ## Features
 
 I provide a number of different tools to both fit and analyse a collection of events using Hawkes processes.
 
-### Simulation of a Hawkes process
+### Simulate a Hawkes process
 
 ```julia
 bg = 0.5
