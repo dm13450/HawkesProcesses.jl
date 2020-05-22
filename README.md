@@ -18,7 +18,7 @@ maxT = 100
 simevents = HawkesProcesses.simulate(bg, kappa, kernel, maxT)
 ```
 
-### Enhance Bayesian Inference
+### Enhanced Bayesian Inference
 
 Sample the parameters of a Hawkes process using the latent variable Bayesian MCMC algorithm.
 Currently only constant background, constant κ and exponential kernel are available, but this will be extend to generic functions in the future.  
