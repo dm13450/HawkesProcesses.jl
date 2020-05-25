@@ -33,9 +33,16 @@ function parent_probs(events::Array{<:Number, 1}, bg, kappa::Float64, kern::Func
 end
 
 function event_parent_prob(event::Number, bg::Number, kappa::Float64, kern::Function, eventdifference::Array{<:Number, 1})
-    probs = Array{Float64, 1}(undef, length(eventdifference) + 1)
+#    probs = Array{Float64, 1}(undef, length(eventdifference) + 1)
+#    probs[1] = bg
+#    probs[2:end] .= kappa * kern.(eventdifference)
+#    probs
+    n = length(eventdifference)
+    probs = Array{Float64, 1}(undef, n + 1)
     probs[1] = bg
-    probs[2:end] .= kappa * kern(eventdifference)
+    for i = 2:(n+1)
+        probs[i] = kappa * kern(eventdifference[i-1])
+    end
     probs
 end
 
