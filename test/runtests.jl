@@ -2,7 +2,7 @@ using HawkesProcesses
 using Distributions
 using Test
 
-inferTests = false
+inferTests = true
 
 my_tests = ["event_difference_test.jl",
             "parent_probabilites_test.jl",
@@ -12,7 +12,8 @@ my_tests = ["event_difference_test.jl",
             "intensity_test.jl",
             "compensator_test.jl",
             "time_change_test.jl",
-            "likelihood_test.jl"]
+            "likelihood_test.jl",
+            "test_utils.jl"]
 
 println("Running tests: ")
 
