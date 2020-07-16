@@ -11,8 +11,10 @@ module HawkesProcesses
     include("simulate.jl")
     include("intensity.jl")
     include("likelihood.jl")
+    include("time_change.jl")
+    include("compensator.jl")
     include("utils.jl")
 
-    export HawkesFit, HierarchicalHawkesFit
+    export fit, HierarchicalHawkesFit
 
 end # module

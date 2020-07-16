@@ -9,10 +9,14 @@ my_tests = ["event_difference_test.jl",
             "sample_parents_test.jl",
             "all_constant_hawkes_test.jl",
             "simulate_test.jl",
-            "intensity_test.jl"]
+            "intensity_test.jl",
+            "compensator_test.jl",
+            "time_change_test.jl"]
 
 println("Running tests: ")
 
-for test in my_tests
-    include(test)
+@testset "HawkesProcesses.jl" begin
+    for test in my_tests
+        include(test)
+    end
 end
