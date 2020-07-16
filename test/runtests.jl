@@ -2,7 +2,7 @@ using HawkesProcesses
 using Distributions
 using Test
 
-inferTests = Bool(Int(get(ENV, "INFER_TESTS", "1")))
+inferTests = Bool(parse(Int64, get(ENV, "INFER_TESTS", "1")))
 
 my_tests = ["event_difference_test.jl",
             "parent_probabilites_test.jl",
