@@ -8,7 +8,9 @@
     @testset "Constant Background Rate" begin
         inferTests && @inferred HawkesProcesses.sample_parents([1,2,3], 0.5, 0.5, kernelTest)
 
-        HawkesProcesses.sample_parents([1,2,3], 0.5, 0.5, kernelTest)
+        sp = HawkesProcesses.sample_parents([1,2,3], 0.5, 0.5, kernelTest)
+        @test length(sp) == 4
+        @test length(sp[1]) == 3
     end
 
     @testset "Function Background Rate" begin

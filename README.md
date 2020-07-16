@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/dm13450/HawkesProcesses.jl.svg?branch=master)](https://travis-ci.org/dm13450/HawkesProcesses.jl)
+
+[![Coverage Status](https://coveralls.io/repos/github/dm13450/HawkesProcesses.jl/badge.svg?branch=master)](https://coveralls.io/github/dm13450/HawkesProcesses.jl?branch=master)
+
 # HawkesProcesses
 
 A Julia package for fitting, analysing and plotting Hawkes processes.
