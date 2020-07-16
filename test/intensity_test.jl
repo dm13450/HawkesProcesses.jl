@@ -20,7 +20,7 @@
         kappa = 0.5
         kern = Distributions.Exponential(1/0.5)
         testEvents = [1, 2, 3]
-        inferTests && @inferred HawkesProcesses.intensity(0, testEvents, bg, kappa, kern)
+        inferTests && @inferred HawkesProcesses.intensity([0], testEvents, bg, kappa, kern)
 
         int = HawkesProcesses.intensity([1,2,3], testEvents, bg, kappa, kern)
         @test length(int) == 3
