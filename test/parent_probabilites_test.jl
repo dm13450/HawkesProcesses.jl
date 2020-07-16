@@ -10,5 +10,14 @@
         @test testProbs[1] == bg
     end
 
+    @testset "Full" begin
+    
+        inferTests && @inferred HawkesProcesses.parent_probs(sort(rand(100)), bg, kappa, kern)
+        pp = HawkesProcesses.parent_probs(sort(rand(100)), bg, kappa, kern)
+
+        @test length(pp) == 100
+
+    end
+
 
 end

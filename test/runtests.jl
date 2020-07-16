@@ -11,7 +11,8 @@ my_tests = ["event_difference_test.jl",
             "simulate_test.jl",
             "intensity_test.jl",
             "compensator_test.jl",
-            "time_change_test.jl"]
+            "time_change_test.jl",
+            "likelihood_test.jl"]
 
 println("Running tests: ")
 
