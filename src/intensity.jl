@@ -23,6 +23,12 @@ function intensity(ts::Array{<:Number, 1}, events::Array{<:Number, 1}, backgroun
   return output
 end
 
+function intensity(ts::Array{<:Number, 1}, events::Array{<:Number, 1}, background, kappa::Float64, kernel::Distributions.Distribution)
+  kernel_pdf, kernel_cdf = generate_kernel_functions(kernel)
+  intensity(ts, events, background, kappa, kernel_pdf)
+end
+
+
 function intensity(ts::Number, events::Array{<:Number, 1},
                    background::Number, kappa::Float64, kernel::Function)
   bgContrib = background
@@ -37,7 +43,7 @@ end
 
 function kernel_contribution(ts::Number, events::Array{<:Number, 1}, kappa::Float64, kernel::Function)
   evalEvents = events[events .< ts]
-  s = zero(ts)
+  s::Number = zero(ts)
   if !isempty(evalEvents)
     kernEval::Array{Number, 1} = kernel.(ts .- evalEvents)
     s = kappa * sum(kernEval)

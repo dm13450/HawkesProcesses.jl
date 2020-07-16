@@ -44,6 +44,11 @@ function simulate(bg::Number, kappa::Float64, kern::Function, maxT::Number)
     sort(allevents)
 end
 
+function simulate(bg::Number, kappa::Float64, kernD::Distributions.Distribution, maxT::Number)
+    kern, kern_cdf = generate_kernel_functions(kernD)
+    return simulate(bg, kappa, kern, maxT)
+end
+
 function poisson_simulation(rate::Number, maxT::Number)
     nevents = rand(Distributions.Poisson(rate*maxT))
     event_times = sort(rand(Distributions.Uniform(0, maxT), nevents))
