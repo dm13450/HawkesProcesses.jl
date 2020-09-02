@@ -1,7 +1,7 @@
 name = "HawkesProcesses"
 uuid = "2d64fb00-3e8a-11e9-1551-1b9de1d1a1b5"
 authors = ["dm13450 <dean.markwick@talk21.com>"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
