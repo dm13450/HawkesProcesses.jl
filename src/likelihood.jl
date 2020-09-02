@@ -1,6 +1,5 @@
 """
-    likelihood(events, background::Float64, kappa::Float64, kernel::Distributions.Distribution, maxT::Number)
-
+    likelihood(events::Array{<:Number, 1}, background::Float64, kappa::Float64, kernel::Distributions.Distribution, maxT::Number)
 Calculate the log likelihood of a Hawkes process for given parameters.
 
 # Arguments
@@ -19,7 +18,6 @@ Calculate the log likelihood of a Hawkes process for given parameters.
 # Examples
 
 """
-
 function likelihood(events::Array{<:Number, 1}, background::Float64, kappa::Float64, kernel::Distributions.Distribution, maxT::Number)
     kernel_f, kernel_cdf = generate_kernel_functions(kernel)
     likelihood(events, background, kappa, kernel_f, kernel_cdf, maxT)
