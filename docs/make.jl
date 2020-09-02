@@ -1,6 +1,6 @@
-using Pkg
-pkg"activate .."
-push!(LOAD_PATH,"../src/")
+#using Pkg
+#pkg"activate .."
+#push!(LOAD_PATH,"../src/")
 
 using Documenter
 using HawkesProcesses
