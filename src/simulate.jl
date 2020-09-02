@@ -23,7 +23,6 @@ simevents = simulate(0.5, 0.5, kern_f, 100)
 ``
 
 """
-
 function simulate(bg::Number, kappa::Float64, kern::Function, maxT::Number)
 
     childfunction(x) = kappa * kern(x)

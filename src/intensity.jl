@@ -3,18 +3,16 @@
 Evaluate the intensity over a timegrid for some observed events with given Hawkes parameters.
 
 # Arguments
-* ts time grid to evalue the intensity over
-* events Events of the process
-* background Background rate
-* kappa Kappa value
-* kernel Kernel function
+* `ts::Array{<:Number,1}`: time grid to evalue the intensity over
+* `events::Array{<:Number,1}`: Events of the process
+* `background`: Background rate
+* `kappa::Float64`: Kappa value
+* `kernel::Function`: Kernel function
 
 # Notes
-* kappa must be between 0 and 1
+* `kappa` must be between 0 and 1
 
 """
-## Can be made simpler/better by passing the background evaled through the function
-
 function intensity(ts::Array{<:Number, 1}, events::Array{<:Number, 1}, background, kappa::Float64, kernel::Function)
   output = Array{Number, 1}(undef, length(ts))
   for (i, timestamp) in enumerate(ts)

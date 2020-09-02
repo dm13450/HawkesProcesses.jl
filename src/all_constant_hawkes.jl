@@ -1,18 +1,17 @@
 """
-    fit(eventTimes, maxT, its)
+    fit(events, maxT, its)
 
-# Arugments
+# Arguments
 
-* eventTimes The array of event times to fit the Hawkes process too.
-* maxT The boundary time over which the events were observed.
-* Number of iterations to sample for
+* `events` The array of event times to fit the Hawkes process too.
+* `maxT` The boundary time over which the events were observed.
+* `its` Number of iterations to sample for
 
 # Notes
 
-* All eventTimes must be unique
+* All `events` must be unique
 
 """
-
 function fit(events::Array{<:Number, 1}, maxT::Number, its::Int64)
 
     nEvents = length(events)
@@ -47,6 +46,5 @@ function fit(events::Array{<:Number, 1}, maxT::Number, its::Int64)
         #kernFunc(x) = Distributions.pdf.(kernDistribution, x)
         parentVectorSample, numBG, chEvents, shiftTimes = sample_parents(events, bgSamples[i], kappaSamples[i], kernFunc, eventDifferences)
     end
-
     bgSamples, kappaSamples, kernSamples
 end
