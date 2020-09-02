@@ -14,6 +14,7 @@ module HawkesProcesses
     include("time_change.jl")
     include("compensator.jl")
     include("utils.jl")
+    include("event_probability.jl")
 
     export fit, HierarchicalHawkesFit
 
