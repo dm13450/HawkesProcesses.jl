@@ -5,7 +5,7 @@ Simulate a Hawkes process between 0 and `maxT` with parameters `bg`, `kappa`, `k
 
 # Arguments
 
-* `bg`: The background rate of the Hawkes process.
+* `bg`: The background rate of the Hawkes process. Constant or positive function. 
 * `kappa`: The kappa parameter of the Hawkes process.
 * `kern` : The kernel function of the Hawkes process.
 * `maxT` : Maximum time that the Hawkes process will be simulated for.
@@ -23,7 +23,7 @@ simevents = simulate(0.5, 0.5, kern_f, 100)
 ``
 
 """
-function simulate(bg::Number, kappa::Float64, kern::Function, maxT::Number)
+function simulate(bg, kappa::Float64, kern::Function, maxT::Number)
 
     childfunction(x) = kappa * kern(x)
     lambda_max = childfunction(0)
@@ -43,7 +43,7 @@ function simulate(bg::Number, kappa::Float64, kern::Function, maxT::Number)
     sort(allevents)
 end
 
-function simulate(bg::Number, kappa::Float64, kernD::Distributions.Distribution, maxT::Number)
+function simulate(bg, kappa::Float64, kernD::Distributions.Distribution, maxT::Number)
     kern, kern_cdf = generate_kernel_functions(kernD)
     return simulate(bg, kappa, kern, maxT)
 end

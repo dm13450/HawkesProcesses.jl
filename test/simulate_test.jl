@@ -22,5 +22,11 @@ using Distributions
         inferTests && @inferred HawkesProcesses.simulate(0.5, 0.5, kernD, 100)
     end
 
+    @testset "Hawkes Simulation with function background" begin
+        kernD = Distributions.Exponential(1/0.5)
+        testevents = HawkesProcesses.simulate(x-> 0.5*x, 0.5, kernD, 10)
+        @test length(testevents) > 0
+    end
+
 
 end
