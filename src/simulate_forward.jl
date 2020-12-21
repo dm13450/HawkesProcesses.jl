@@ -10,7 +10,7 @@ Simulate a Hawkes process given we have already observed some events. This can b
 * `startT` Starting time from which to simulate forward. 
 * `bg` Background value
 * `kappa` Kappa value
-* `kern` Kernel function
+* `kern` Kernel function or distribution
 
 """
 function simulate_forward(eventHistory, maxT::Number, startT::Number, bg::Number, kappa::Number, kern::Function)
@@ -19,4 +19,9 @@ function simulate_forward(eventHistory, maxT::Number, startT::Number, bg::Number
     events = simulate(bgF, bg, kappa, kern, maxT)
     events .+ startT
 
+end
+
+function simulate_forward(eventHistory, maxT::Number, startT::Number, bg::Number, kappa::Number, kern::Distribution)
+    kern, kern_cdf = generate_kernel_functions(kernD)
+    simulate_forward(eventHistory, maxT, startT, bg, kappa, kern)
 end
