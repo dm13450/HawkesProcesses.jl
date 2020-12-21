@@ -10,6 +10,15 @@
         @test testProbs[1] == bg
     end
 
+    @testset "Individual - Functional Background" begin
+        inferTests && @inferred HawkesProcesses.event_parent_prob(3, x->0.5, kappa, kern, [1, 2])
+        testProbs = HawkesProcesses.event_parent_prob(3, x->0.5, kappa, kern, [1, 2])
+        @test length(testProbs) == 3
+        @test testProbs[1] == 0.5
+    end
+
+
+
     @testset "Full" begin
     
         inferTests && @inferred HawkesProcesses.parent_probs(sort(rand(100)), bg, kappa, kern)
