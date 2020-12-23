@@ -14,7 +14,8 @@ my_tests = ["event_difference_test.jl",
             "time_change_test.jl",
             "likelihood_test.jl",
             "test_utils.jl",
-            "event_probability_test.jl"]
+            "event_probability_test.jl",
+            "simulate_forward_test.jl"]
 
 println("Running tests: ")
 
