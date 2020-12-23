@@ -15,7 +15,8 @@ module HawkesProcesses
     include("compensator.jl")
     include("utils.jl")
     include("event_probability.jl")
+    include("simulate_forward.jl")
 
-    export fit, HierarchicalHawkesFit
+    export fit
 
 end # module

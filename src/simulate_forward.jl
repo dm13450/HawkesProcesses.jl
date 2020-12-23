@@ -15,13 +15,13 @@ Simulate a Hawkes process given we have already observed some events. This can b
 """
 function simulate_forward(eventHistory, maxT::Number, startT::Number, bg::Number, kappa::Number, kern::Function)
 
-    bgF(x) = intensity(x + startT, eventHistory, bg, kappa, kern)
-    events = simulate(bgF, bg, kappa, kern, maxT)
+    bgF(x) = intensity(collect(x .+ startT), eventHistory, bg, kappa, kern)
+    events = simulate(bgF, kappa, kern, maxT)
     events .+ startT
 
 end
 
 function simulate_forward(eventHistory, maxT::Number, startT::Number, bg::Number, kappa::Number, kern::Distribution)
-    kern, kern_cdf = generate_kernel_functions(kernD)
-    simulate_forward(eventHistory, maxT, startT, bg, kappa, kern)
+    kernD, kern_cdf = generate_kernel_functions(kern)
+    simulate_forward(eventHistory, maxT, startT, bg, kappa, kernD)
 end
