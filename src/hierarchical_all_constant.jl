@@ -1,49 +1,41 @@
-function HierarchicalHawkesFit(eventTimesList, maxT, its)
+function hierarchical_fit(eventTimesList, maxT, its)
+    nSamples = length(eventTimesList)
+    nEvents = map(length, eventTimesList)
+    eventDifferences = map(event_difference_list, eventTimesList)
+    maxTDifferences = map(x-> maxT .- x, eventTimesList)
 
-    nObs = size(eventTimesList)[1]
-    nEvents = mapreduce(x -> length(x), +, eventTimesList)
-
-    eventDifferences = map(eventDifferenceMatrix, eventTimesList)
-
-    bgSamples = zeros(its)
-    kappaSamples = zeros(its)
-    kernSamples = zeros(its)
+    bgSamples = zeros(Float64, its)
+    kappaSamples = zeros(Float64, its)
+    kernSamples = zeros(Float64, its)
 
     bgSamples[1] = rand()
     kappaSamples[1] = rand()
     kernSamples[1] = rand()
 
-    kernDistribution::Distributions.Exponential{Float64} =
-                                    Distributions.Exponential(1/kernSamples[1])
-    kernFunc(x) = Distributions.pdf.(kernDistribution, x)
+    kernSample = kernSamples[1]
+    kernDistribution::Exponential{Float64} = Distributions.Exponential(1/kernSample)
+    kernFunc(x::Number) = Distributions.pdf(kernDistribution, x)
 
-    parentVectorSampleArray = map( x -> parentSample(x,
-                                                     bgSamples[1],
-                                                     kappaSamples[1],
-                                                     kernFunc), eventDifferences)
+    sampleData = map(j-> sample_parents(eventTimesList[j], bgSamples[1], kappaSamples[1], kernFunc, eventDifferences[j]), 1:nSamples)
 
-    for i = 2:its
+    for i in 2:its
+        totalBG = mapreduce(x->x[2], +, sampleData)
+        bgSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + totalBG, 1/(0.01+nSamples))) / maxT
 
-        eventCounts = map((x,y) -> countEvent(x, y), parentVectorSampleArray, eventTimesList)
+        H_tildes = map(x->sum(cdf.(kernDistribution, x)), maxTDifferences)
+        totalChildEvents = mapreduce(x -> sum(x[3]), +, sampleData)
+        kappaSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + totalChildEvents, 1/(0.01 + sum(H_tildes))))
 
-        numBG = mapreduce(x-> x[1], +, eventCounts)
-        chEvents = mapreduce(x -> x[2], vcat, eventCounts)
-        shiftTimes = mapreduce(x -> x[3], vcat, eventCounts)
-
-        bgSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + numBG, 1/(0.01+(nObs))))/maxT
-
-        kappaSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + sum(chEvents), 1/(0.01+nEvents)))
-
-        kernSample = Distributions.rand(Distributions.Gamma(0.01 + length(shiftTimes), 1/(0.01 + sum(shiftTimes))))
+        totalShiftTimes = mapreduce(x -> sum(x[4]), +, sampleData)
+        nShiftTimes = mapreduce(x -> length(x[4]), +, sampleData)
+        kernSample = Distributions.rand(Distributions.Gamma(0.01 + nShiftTimes, 1/(0.01 + totalShiftTimes)))
         kernSamples[i] = kernSample
-        kernDistribution = Distributions.Exponential(1/kernSample)
+        kernDistribution = Distributions.Exponential(1/kernSamples[i])
 
-        parentVectorSampleArray = map( x -> parentSample(x,
-                                                         bgSamples[i],
-                                                         kappaSamples[i],
-                                                         kernFunc),  eventDifferences)
+        sampleData = map(j-> sample_parents(eventTimesList[j], bgSamples[i], kappaSamples[i], kernFunc, eventDifferences[j]), 1:nSamples)
+
     end
 
-    bgSamples, kappaSamples, kernSamples
 
+    (bgSamples, kappaSamples, kernSamples)
 end
