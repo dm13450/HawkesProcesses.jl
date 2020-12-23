@@ -37,13 +37,12 @@ function fit(events::Array{<:Number, 1}, maxT::Number, its::Int64)
         bgSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + numBG, 1/(0.01+1))) / maxT
 
         H_tilde::Float64 = sum(cdf.(kernDistribution, maxTDifferences))
-
         kappaSamples[i] = Distributions.rand(Distributions.Gamma(0.01 + sum(chEvents), 1/(0.01 + H_tilde)))
+
         kernSample = Distributions.rand(Distributions.Gamma(0.01 + length(shiftTimes), 1/(0.01 + sum(shiftTimes))))
         kernSamples[i] = kernSample
-
         kernDistribution = Distributions.Exponential(1/kernSamples[i])
-        #kernFunc(x) = Distributions.pdf.(kernDistribution, x)
+
         parentVectorSample, numBG, chEvents, shiftTimes = sample_parents(events, bgSamples[i], kappaSamples[i], kernFunc, eventDifferences)
     end
     bgSamples, kappaSamples, kernSamples
