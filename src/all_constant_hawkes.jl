@@ -5,7 +5,7 @@
 
 * `events` The array of event times to fit the Hawkes process too.
 * `maxT` The boundary time over which the events were observed.
-* `its` Number of iterations to sample for
+* `its` Number of iterations to sample for.
 
 # Notes
 

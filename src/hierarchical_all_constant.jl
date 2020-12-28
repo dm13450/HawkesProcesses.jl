@@ -1,3 +1,14 @@
+"""
+    hierarchical_fit(eventsTimesList, maxT, its)
+
+# Arguments 
+
+* `eventTimesList` An array of arrays of events. 
+* `maxT` The boundary time over which the events were observed. 
+* `its` Number for of iterations to sample for.
+
+
+"""
 function hierarchical_fit(eventTimesList, maxT, its)
     nSamples = length(eventTimesList)
     nEvents = map(length, eventTimesList)
