@@ -1,4 +1,8 @@
-[![Build Status](https://github.com/dm13450/HawkesProcesses.jl/workflows/CI.yml/badge.svg)
+
+[gh-ci-img]: https://github.com/dm13450/HawkesProcesses.jl/workflows/ci/badge.svg
+[gh-ci-url]: https://github.com/dm13450/HawkesProcesses.jl/actions
+
+[![][gh-ci-img]][gh-ci-url]
 [![Coverage Status](https://coveralls.io/repos/github/dm13450/HawkesProcesses.jl/badge.svg?branch=master)](https://coveralls.io/github/dm13450/HawkesProcesses.jl?branch=master)
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://dm13450.github.io/HawkesProcesses.jl/stable)
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://dm13450.github.io/HawkesProcesses.jl/dev)
