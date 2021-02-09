@@ -1,5 +1,5 @@
 """
-    fit(events, maxT, its)
+    fit(events::Array{<:Number, 1}, maxT::Number, its::Int64)
 
 # Arguments
 
