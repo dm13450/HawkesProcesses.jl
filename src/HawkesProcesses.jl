@@ -17,6 +17,9 @@ module HawkesProcesses
     include("event_probability.jl")
     include("simulate_forward.jl")
 
-    export fit
+    export fit, hierarchical_fit, 
+    intensity, compensator,
+    likelihood,
+    simulate, simulate_forward
 
 end # module
