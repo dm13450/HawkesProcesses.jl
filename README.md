@@ -58,3 +58,8 @@ intensity = HawkesProcesses.intensity(ts, simevents, bg, kappa, kernel)
 
 * Likelihood with functional background
 * Generic Bayesian inference.
+
+## Blog Posts
+
+* [HawkesProcesses.jl: An Introduction](http://dm13450.github.io/2020/05/26/HawkesProcessesPackage.html)
+* [Hawkes Processes and DIC](http://dm13450.github.io/2020/08/26/Hawkes-and-DIC.html)

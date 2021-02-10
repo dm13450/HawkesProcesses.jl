@@ -1,5 +1,5 @@
 
-This package was designed to provide an implementation of an efficient Bayesian sampling algorithm but using the availabel functions you can also use frequentist methods. 
+This package was designed to provide an implementation of an efficient Bayesian sampling algorithm but using the available functions you can also use frequentist methods. 
 
 ### Bayesian Inference
 
@@ -16,9 +16,26 @@ simEvents = HawkesProcesses.simulate(bg, kappa, kernF, maxT)
 bgSamples, kappaSamples, kernSamples = HawkesProcesses.fit(simEvents, maxT, 1000)
 ```
 
-Here we now have MCMC chains for the three different parameters.
+Here we now have MCMC chains for the three different parameters. 
+
+At the minute, only the exponential distribution for the kernel is implemented. 
+In future releases this will be changed to be generic for any kernel you specify. 
 
 
 ### Frequentist Inference
 
-TBC
+Another (and potentially quicker) method of infering the parameters is to maximise the likelihood function. 
+
+```@example
+using Optim
+
+opt = optimize(x-> -1*HawkesProcesses.likelihood(simEvents, 
+                                                 x[1],
+                                                 x[2],
+                                                 Distriubtions.Exponential(x[3]),
+                                                 maxT),
+                rand(3))
+Optim.minimizer(opt)
+```
+
+Simply passing the likelihood function through to the optimiser allows for a quick and easy estimate of the parameters. 
