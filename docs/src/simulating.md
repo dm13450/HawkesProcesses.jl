@@ -28,3 +28,14 @@ TBC
 ### Marked Hawkes Process
 
 TBC
+
+## Predicting by Simulating Forward 
+
+Simulating forward is the process of using the already occurred events to simulate future events. 
+
+```@example
+newEvents = simulate_forward(events, maxT, startT, bgVal, kappaVal, kern)
+```
+
+
+

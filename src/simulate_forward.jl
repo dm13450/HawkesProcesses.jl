@@ -1,11 +1,11 @@
 
 """
-    simulate_forward
+    simulate_forward(eventHistory, maxT, startT, bg, kappa, kern)
 
 Simulate a Hawkes process given we have already observed some events. This can be used to forecast future events. 
 
 # Arguments
-* `eventHistory`
+* `eventHistory` The events that have ocured so far. 
 * `maxT` Maximum time value to simulate forward to.
 * `startT` Starting time from which to simulate forward. 
 * `bg` Background value
@@ -14,11 +14,9 @@ Simulate a Hawkes process given we have already observed some events. This can b
 
 """
 function simulate_forward(eventHistory, maxT::Number, startT::Number, bg::Number, kappa::Number, kern::Function)
-
     bgF(x) = intensity(collect(x .+ startT), eventHistory, bg, kappa, kern)
     events = simulate(bgF, kappa, kern, maxT)
     events .+ startT
-
 end
 
 function simulate_forward(eventHistory, maxT::Number, startT::Number, bg::Number, kappa::Number, kern::Distribution)

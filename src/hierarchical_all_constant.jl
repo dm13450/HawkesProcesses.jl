@@ -9,7 +9,7 @@
 
 
 """
-function hierarchical_fit(eventTimesList, maxT, its)
+function hierarchical_fit(eventTimesList, maxT::Number, its::Int64)
     nSamples = length(eventTimesList)
     nEvents = map(length, eventTimesList)
     eventDifferences = map(event_difference_list, eventTimesList)

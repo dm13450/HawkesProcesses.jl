@@ -24,7 +24,7 @@ In future releases this will be changed to be generic for any kernel you specify
 
 ### Frequentist Inference
 
-Another (and potentially quicker) method of infering the parameters is to maximise the likelihood function. 
+Another (and potentially quicker) method of inferring the parameters is to maximise the likelihood function. 
 
 ```@example
 using Optim
