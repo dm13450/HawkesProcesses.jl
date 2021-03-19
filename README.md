@@ -13,6 +13,11 @@ A Julia package for fitting, analysing and plotting Hawkes processes.
 
 You can find the maths behind the algorithm [here](https://dm13450.github.io/assets/hawkesprocesses.pdf). The Bayesian sampling algorithm is a generic version of the `bayesianETAS` package from CRAN which can be found [here](https://cran.r-project.org/web/packages/bayesianETAS/index.html).
 
+## Examples
+
+* [HawkesProcesses.jl: An Introduction](http://dm13450.github.io/2020/05/26/HawkesProcessesPackage.html)
+* [Hawkes Processes and DIC](http://dm13450.github.io/2020/08/26/Hawkes-and-DIC.html)
+* [Does a Terror Attack Lead to More Terror Attacks?](http://dm13450.github.io/2021/03/02/Terror-Attacks-Hawkes-Processes.html)
 ## Features
 
 I provide a number of different tools to both fit and analyse a collection of events using Hawkes processes.
@@ -59,7 +64,3 @@ intensity = HawkesProcesses.intensity(ts, simevents, bg, kappa, kernel)
 * Likelihood with functional background
 * Generic Bayesian inference.
 
-## Blog Posts
-
-* [HawkesProcesses.jl: An Introduction](http://dm13450.github.io/2020/05/26/HawkesProcessesPackage.html)
-* [Hawkes Processes and DIC](http://dm13450.github.io/2020/08/26/Hawkes-and-DIC.html)
