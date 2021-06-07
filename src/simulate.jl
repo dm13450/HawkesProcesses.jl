@@ -55,7 +55,7 @@ function poisson_simulation(rate::Number, maxT::Number)
 end
 
 function poisson_simulation(rate::Function, maxT::Number)
-    lambda_max = 1.1*maximum(rate(range(0, maxT, length=1000)))
+    lambda_max = 1.1*maximum(rate(collect(range(0, maxT, length=1000))))
     poisson_simulation(rate, maxT, lambda_max)
 end
 
